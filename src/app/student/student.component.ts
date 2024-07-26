@@ -79,6 +79,7 @@ export class StudentComponent implements OnInit {
   }
 
   onDeleteStudent(studentData: studentModal) {
+    this.studentObj = studentData;
     const isConfirm = confirm('Are you sure you want to delete the record?');
 
     if (isConfirm) {
