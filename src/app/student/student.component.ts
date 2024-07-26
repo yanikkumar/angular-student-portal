@@ -78,6 +78,18 @@ export class StudentComponent implements OnInit {
     this.openModal();
   }
 
+  onDeleteStudent(studentData: studentModal) {
+    const isConfirm = confirm('Are you sure you want to delete the record?');
+
+    if (isConfirm) {
+      const currentStudent = this.studentList.findIndex(
+        (s) => s.id === this.studentObj.id
+      );
+      this.studentList.splice(currentStudent, 1);
+      localStorage.setItem('studentData', JSON.stringify(this.studentList));
+    }
+  }
+
   getStudentList() {
     const localData = localStorage.getItem('studentData');
 
