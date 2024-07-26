@@ -1,0 +1,19 @@
+.header {
+  background: linear-gradient(135deg, #db0000, #000000);
+  padding: 10px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 10px;
+}
+
+.card-header {
+  background: linear-gradient(120deg, #00b7db, #000000);
+  color: #ffffff;
+}
+
+.modal-header {
+  background: linear-gradient(#00b7db, #000000);
+  color: #ffffff;
+}

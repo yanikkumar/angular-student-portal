@@ -1,0 +1,81 @@
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { empty } from 'rxjs';
+
+@Component({
+  selector: 'app-student',
+  standalone: true,
+  imports: [FormsModule, CommonModule],
+  templateUrl: './student.component.html',
+  styleUrl: './student.component.css',
+})
+export class StudentComponent implements OnInit {
+  @ViewChild('myModal') modal: ElementRef | undefined;
+  studentObj: studentModal = new studentModal();
+  studentList: studentModal[] = [];
+
+  ngOnInit(): void {
+    this.getStudentList();
+  }
+
+  openModal() {
+    const stdModal = document.getElementById('myModal');
+
+    if (stdModal != null) {
+      stdModal.style.display = 'block';
+    }
+  }
+
+  closeModal() {
+    if (this.modal != null) {
+      this.modal.nativeElement.style.display = 'none';
+    }
+  }
+
+  onSaveForm() {
+    debugger;
+    const localData = localStorage.getItem('studentData');
+
+    if (localData != null) {
+      const stdData = JSON.parse(localData);
+      stdData.push(this.studentObj);
+      localStorage.setItem('studentData', JSON.stringify(stdData));
+    } else {
+      const newStudent = [];
+      newStudent.push(this.studentObj);
+      localStorage.setItem('studentData', JSON.stringify(newStudent));
+    }
+
+    this.closeModal();
+    this.getStudentList();
+  }
+
+  getStudentList() {
+    const localData = localStorage.getItem('studentData');
+
+    if (localData != null) {
+      this.studentList = JSON.parse(localData);
+    }
+  }
+}
+
+export class studentModal {
+  name: string;
+  mobile: string;
+  email: string;
+  gender: string;
+  doj: string;
+  address: string;
+  status: boolean;
+
+  constructor() {
+    this.name = '';
+    this.mobile = '';
+    this.email = '';
+    this.gender = '';
+    this.doj = '';
+    this.address = '';
+    this.status = false;
+  }
+}
