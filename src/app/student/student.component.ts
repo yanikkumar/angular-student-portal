@@ -34,21 +34,28 @@ export class StudentComponent implements OnInit {
   }
 
   onSaveForm() {
-    debugger;
+    // debugger;
     const localData = localStorage.getItem('studentData');
 
     if (localData != null) {
       const stdData = JSON.parse(localData);
       stdData.push(this.studentObj);
+      this.studentObj.id = stdData.length + 1;
       localStorage.setItem('studentData', JSON.stringify(stdData));
     } else {
       const newStudent = [];
       newStudent.push(this.studentObj);
+      this.studentObj.id = 1;
       localStorage.setItem('studentData', JSON.stringify(newStudent));
     }
 
     this.closeModal();
     this.getStudentList();
+  }
+
+  onEditStudent(studentData: studentModal) {
+    this.studentObj = studentData;
+    this.openModal();
   }
 
   getStudentList() {
@@ -61,6 +68,7 @@ export class StudentComponent implements OnInit {
 }
 
 export class studentModal {
+  id: number;
   name: string;
   mobile: string;
   email: string;
@@ -70,6 +78,7 @@ export class studentModal {
   status: boolean;
 
   constructor() {
+    this.id = 0;
     this.name = '';
     this.mobile = '';
     this.email = '';
