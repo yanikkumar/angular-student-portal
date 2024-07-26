@@ -28,6 +28,7 @@ export class StudentComponent implements OnInit {
   }
 
   closeModal() {
+    this.studentObj = new studentModal();
     if (this.modal != null) {
       this.modal.nativeElement.style.display = 'none';
     }
@@ -49,6 +50,25 @@ export class StudentComponent implements OnInit {
       localStorage.setItem('studentData', JSON.stringify(newStudent));
     }
 
+    this.closeModal();
+    this.getStudentList();
+  }
+
+  onUpdateForm() {
+    const currentStudent = this.studentList.find(
+      (s) => s.id === this.studentObj.id
+    );
+
+    if (currentStudent != undefined) {
+      currentStudent.name = this.studentObj.name;
+      currentStudent.mobile = this.studentObj.mobile;
+      currentStudent.email = this.studentObj.email;
+      currentStudent.gender = this.studentObj.gender;
+      currentStudent.doj = this.studentObj.doj;
+      currentStudent.address = this.studentObj.address;
+      currentStudent.status = this.studentObj.status;
+    }
+    localStorage.setItem('studentData', JSON.stringify(this.studentList));
     this.closeModal();
     this.getStudentList();
   }

@@ -77,7 +77,11 @@
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="modal-header">
+        @if (studentObj.id == 0) {
         <h4 class="modal-title">Add Student</h4>
+        } @else {
+        <h4 class="modal-title">Update Student</h4>
+        }
         <button type="button" class="btn-close" (click)="closeModal()"></button>
       </div>
 
@@ -171,9 +175,15 @@
         <button type="button" class="btn btn-danger" (click)="closeModal()">
           Close
         </button>
+        @if (studentObj.id == 0) {
         <button type="button" class="btn btn-info" (click)="onSaveForm()">
           Save
         </button>
+        } @else {
+        <button type="button" class="btn btn-info" (click)="onUpdateForm()">
+          Update
+        </button>
+        }
       </div>
     </div>
   </div>
